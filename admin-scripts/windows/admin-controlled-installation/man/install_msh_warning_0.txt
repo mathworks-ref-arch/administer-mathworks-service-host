@@ -1,0 +1,7 @@
+WARNING: The environment variable MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT is
+    not currently defined for the current user ($env:USERNAME).
+    Set it to <installation_directory> for all users using the MathWorks products
+    to enable them to use the MathWorks Service Host installed by this script.
+    If the environment variable is empty or unset, MathWorks products will
+    continue to install/use MathWorks Service Host in the default location
+    (%LOCALAPPDATA%/MathWorks/ServiceHost)

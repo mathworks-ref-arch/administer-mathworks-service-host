@@ -1,0 +1,18 @@
+
+Usage: cleanup_default_msh_installation_location.sh [options]
+
+Remove default installation of MathWorks Service Host for the current user
+or all users based on the criteria defined in the options
+
+Options:
+    --for-all-users
+        Clean up MathWorks Service Host installations in the default location
+        for all users.
+        Needs elevated privileges.
+    --excluding <regex_for_installations_to_exclude>
+        Set the regular expression to specify the installation locations to
+        exclude from cleanup.
+    --force
+        Remove all found installations without prompting.
+    --help
+        Display this help and exit.

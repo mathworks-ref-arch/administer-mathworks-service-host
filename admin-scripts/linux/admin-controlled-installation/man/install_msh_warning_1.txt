@@ -1,0 +1,9 @@
+WARNING: The provided <installation_directory> does not match the value of
+    MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT environment variable as set for
+    the current user ($USER).
+    Set the environment variable to <installation_directory> of the
+    admin-controlled-installation of MathWorks Service Host for all users that
+    use MathWorks products.
+    If the environment variable points to a previous installation, MathWorks
+    products will continue to use that older version
+    ($MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT).

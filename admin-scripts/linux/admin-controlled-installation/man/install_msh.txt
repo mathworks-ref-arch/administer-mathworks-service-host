@@ -1,0 +1,28 @@
+Usage: install_msh.sh [options] --destination <installation_directory>
+
+Install the configuration of MathWorks Service Host which supports alternative
+installation locations and does not attempt to automatically update itself.
+
+Options:
+    --destination <installation_directory>
+        Specify the path where MathWorks Service Host should be installed.
+        Mandatory argument
+    --release <release_number>
+        Specify the version of the release to be installed.
+        Available releases: 2024.6.0.6, 2024.7.0.6, 2024.8.0.2, 2024.9.0.2,
+        2024.10.0.3, 2024.11.0.2
+        Default value is the latest available release.
+    --source <download_directory>
+        Specify the path where the MathWorks Service Host zip file can be found.
+        This directory is assumed to contain the zip file with the same name as
+        downloaded by the download_msh.sh script.
+        If not specified, a new MathWorks Service Host zip file downloaded in:
+        $USER/.MathWorks/ServiceHost/tmpZip
+    --update-environment
+        Update /etc/environment to set the environment variable
+        MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=<installation directory>.
+    --no-update-environment
+        Do not update /etc/environment to set the environment variable
+        MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT
+    --help
+        Display this help and exit.

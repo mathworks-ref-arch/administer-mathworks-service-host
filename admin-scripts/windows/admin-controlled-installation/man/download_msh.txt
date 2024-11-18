@@ -1,0 +1,17 @@
+
+Usage: download_msh.ps1 [options] -Destination <download_directory>
+
+Download the configuration of MathWorks Service Host which supports alternative
+installation locations and does not attempt to automatically update itself.
+
+Options:
+    -Destination <download_directory>
+        Specify the path where the MathWorks Service Host zip file should be downloaded.
+        Mandatory argument
+    -Release <release_number>
+        Specify the version of the release to be downloaded.
+        Available releases: 2024.6.0.6, 2024.7.0.6, 2024.8.0.2, 2024.9.0.2,
+        2024.10.0.3, 2024.11.0.2
+        Default value is the latest available release.
+    -Help
+        Display this help and exit.
