@@ -47,10 +47,9 @@ if ($Release) {
     }
 }
 # Parse download directory
-
 if ($Source) {
     $downloadDirectorySpecified=$true
-    $downloadDirectory = (Resolve-Path -Path $Source).Path
+    $downloadDirectory = Convert-Path -Path $Source
 }else{
     $downloadDirectorySpecified=$false
     $downloadDirectory = "$env:LOCALAPPDATA\MathWorks\ServiceHost\tmpZip"
@@ -69,7 +68,7 @@ if (-not $Destination) {
 if (-not (Test-Path -Path $Destination)) {
     New-Item -ItemType Directory -Path $Destination | Out-Null
 }
-$installationDirectory = (Resolve-Path -Path $Destination).Path
+$installationDirectory = Convert-Path $Destination
 
 # Extract the zip into the desired location, replacing any existing installation of the same version
 $downloadedZipFile = Join-Path -Path $downloadDirectory -ChildPath "managed_mathworksservicehost_${releaseNumber}_package_win64.zip"

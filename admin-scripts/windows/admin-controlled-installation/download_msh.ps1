@@ -47,12 +47,11 @@ if (-not $Destination) {
 if (-not (Test-Path -Path $Destination)) {
     New-Item -ItemType Directory -Path "$Destination" | Out-Null
 }
-$downloadDirectory = (Resolve-Path -Path $Destination).Path
+$downloadDirectory = Convert-Path -Path $Destination
 
 # Download the specified release
 $downloadUrl = "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v$releaseNumber/release/win64/managed_mathworksservicehost_${releaseNumber}_package_win64.zip"
-$downloadZipFile = Join-Path -Path $downloadDirectory -ChildPath "managed_mathworksservicehost_${releaseNumber}_package_win64.zip" | Convert-Path
-# $downloadZipFile = Convert-Path $downloadZipFile
+$downloadZipFile = Join-Path -Path $downloadDirectory -ChildPath "managed_mathworksservicehost_${releaseNumber}_package_win64.zip"
 
 Start-BitsTransfer -Source $downloadUrl -Destination $downloadZipFile
 
