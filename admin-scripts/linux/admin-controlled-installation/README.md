@@ -6,7 +6,7 @@ These instructions are intended for administering MathWorks&reg; Service Host on
 >Note: For more details about the following scripts and their available options, run them with `--help` option, e.g. `./download_msh.sh --help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the MathWorks website using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://www.mathworks.com/MathWorksServiceHost/glnxa64/managed.zip) or by using this command:
 ```bash
 ./download_msh.sh --destination /tmp/Downloads/MathWorks/ServiceHost
 ```
@@ -20,7 +20,7 @@ sudo ./install_msh.sh --source /Shared/Software/MathWorks/ServiceHost/ --destina
 
 You need to set the set the environment variable `MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT` for all users on the end user machines who intend to use MathWorks products. This environment variable should be set to the MathWorks Service Host installation root (in this example, `MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=/usr/local/MathWorks/ServiceHost/`).
 
-One way to achieve this is to use the `--update-environment` flag with the `ìnstall_msh.sh` script to set this as a system environment variable. It does this by adding/updating the variable in `/etc/environment`. If the `--update-environment` flag is not specified, you will be prompted to choose whether to update this variable in `/etc/environment` during installation, unless the `--no-update-environment` option is used.
+One way to achieve this is to use the `--update-environment` flag with the `install_msh.sh` script to set this as a system environment variable. It does this by adding/updating the variable in `/etc/environment`. If the `--update-environment` flag is not specified, you will be prompted to choose whether to update this variable in `/etc/environment` during installation, unless the `--no-update-environment` option is used.
 
 >Note: If the environment variable is not set, MATLAB&reg; will install/use MathWorks Service Host in the default location in `$HOME`.
 
@@ -49,6 +49,6 @@ We encourage you to try this repository with your environment and provide feedba
 
 ----
 
-Copyright 2024 The MathWorks, Inc.
+Copyright 2024-2025 The MathWorks, Inc.
 
 ----

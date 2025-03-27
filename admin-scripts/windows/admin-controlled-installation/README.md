@@ -5,7 +5,7 @@ These instructions are intended for administering MathWorks&reg; Service Host  o
 >Note: For more details about the following scripts and their available options, run them with `-Help` option, e.g. `.\download_msh.ps1 -Help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the MathWorks website using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://www.mathworks.com/MathWorksServiceHost/win64/managed.zip) or by using this command:
 ```ps1
 .\download_msh.ps1 -Destination C:\Downloads\MathWorks\ServiceHost\
 ```
@@ -19,7 +19,7 @@ To install MathWorks Service Host to the desired location on the end user machin
 
 You need to set the set the environment variable `MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT` for all users on the end user machines who intend to use MathWorks products. This environment variable should be set to the MathWorks Service Host installation root (in this example, `MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT="C:\Program Files\MathWorks\ServiceHost"`).
 
-One way to achieve this is to use the `-UpdateEnvironment` flag with the `ìnstall_msh.ps1` script to set this as a system environment variable. It does this by adding/updating the variable in the Windows Registry under `HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment`. If the `-UpdateEnvironment` flag is not specified, you will be prompted to choose whether to update this variable in the Windows Registry during installation, unless the `-NoUpdateEnvironment` option is used.
+One way to achieve this is to use the `-UpdateEnvironment` flag with the `install_msh.ps1` script to set this as a system environment variable. It does this by adding/updating the variable in the Windows Registry under `HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment`. If the `-UpdateEnvironment` flag is not specified, you will be prompted to choose whether to update this variable in the Windows Registry during installation, unless the `-NoUpdateEnvironment` option is used.
 
 >Note: If the environment variable is not set, MATLAB&reg; will install/use MathWorks Service Host in the default location in `%LOCALAPPDATA%\MathWorks`.
 
@@ -48,6 +48,6 @@ We encourage you to try this repository with your environment and provide feedba
 
 ----
 
-Copyright 2024 The MathWorks, Inc.
+Copyright 2024-2025 The MathWorks, Inc.
 
 ----
