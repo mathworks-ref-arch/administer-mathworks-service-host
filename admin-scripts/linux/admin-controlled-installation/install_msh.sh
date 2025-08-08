@@ -80,7 +80,7 @@ if [ "$download_directory_specified" -eq 1 ]; then
     fi
 else
     # If no download_directory is specified, use the default after downloading the installer into it
-    download_directory="$USER/.MathWorks/ServiceHost/tmpZip"
+    download_directory="$HOME/.MathWorks/ServiceHost/tmpZip"
     if [ ! -d "$download_directory" ]; then
         mkdir -p "$download_directory"
     fi

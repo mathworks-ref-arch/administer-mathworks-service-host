@@ -18,9 +18,9 @@ excluding_regex="(?!a)a" # Never matching regex
 excluding_regex_specified=0
 force=0
 # By default cleanup the installations of the current user
-mapfile -t new_elements < <(find /home/$USER/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type l -print 2>/dev/null)
+mapfile -t new_elements < <(find $HOME/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type l -print 2>/dev/null)
 draft_directories=("${new_elements[@]}")
-mapfile -t new_elements < <(find /home/$USER/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type d -print 2>/dev/null)
+mapfile -t new_elements < <(find $HOME/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type d -print 2>/dev/null)
 draft_directories+=("${new_elements[@]}")
 
 while [[ $# -gt 0 ]]; do
@@ -32,9 +32,17 @@ while [[ $# -gt 0 ]]; do
             ;;
         --for-all-users)
             # Overwrite the list to cleanup with the installations of all found users
-            mapfile -t new_elements < <(find /home/*/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type l -print 2>/dev/null)
+            mapfile -t new_elements < <(
+            getent passwd | cut -d: -f6 | while read -r found_home; do
+                find $found_home/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type l -print 2>/dev/null
+            done
+            )
             draft_directories=("${new_elements[@]}")
-            mapfile -t new_elements < <(find /home/*/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type d -print 2>/dev/null)
+            mapfile -t new_elements < <(
+            getent passwd | cut -d: -f6 | while read -r found_home; do
+                find $found_home/.MathWorks/ServiceHost/*/v202* -mindepth 0 -maxdepth 0 -type d -print 2>/dev/null
+            done
+            )
             draft_directories+=("${new_elements[@]}")
             shift 1
             ;;
@@ -78,7 +86,7 @@ do_cleanup() {
     pkill -f "MathWorksServiceHost-Monitor" 2>/dev/null || true
     pkill -f "MathWorksServiceHost service" 2>/dev/null || true
 
-    # Remove all the identified MSH installations
+    # Remove all the identified installations of MathWorks Service Host
     for element in "${directories_to_cleanup[@]}"; do
         element_parent="$(dirname "$element")"
         rm -rf "$element" || true # Notify the user in case a directory cannot be removed

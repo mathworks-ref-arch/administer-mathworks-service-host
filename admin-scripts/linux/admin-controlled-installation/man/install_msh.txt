@@ -20,7 +20,7 @@ Options:
         This directory is assumed to contain the zip file with the same name as
         downloaded by the download_msh.sh script.
         If not specified, a new MathWorks Service Host zip file downloaded in:
-        $USER/.MathWorks/ServiceHost/tmpZip
+        $HOME/.MathWorks/ServiceHost/tmpZip
     --update-environment
         Update /etc/environment to set the environment variable
         MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=<installation directory>.
