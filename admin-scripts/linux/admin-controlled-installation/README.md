@@ -1,12 +1,19 @@
 
 # Download and Install MathWorks Service Host in a custom location for Linux
 
-These instructions are intended for administering MathWorks&reg; Service Host on Linux&reg;. To replace the default auto-updating version of MathWorks Service Host, run the three steps shown below in sequence. After removing the auto-updated versions, you must update MathWorks Service Host by running steps 1 and 2 when a new release is available. This repository will be updated to reflect the new releases of MathWorks Service Host and notify all the subscribers.
+These instructions are intended for administering MathWorks&reg; Service Host on Linux&reg;. Administrators who are managing MathWorks Service Host installations in custom locations must keep these installations up-to-date. To be notified of new releases of MathWorks Service Host, subscribe to releases in this repository.
+
+>Note: The below scripts work only for MATLAB releases starting from **R2024a Update 6**.
+
+### Switching to an administrator-controlled installation of MathWorks Service Host
+To switch from the default, auto-updating version of MathWorks Service Host to an adminstrator-controlled installation in a custom location, download a copy of this repository and run all three steps shown below in sequence.
+### Updating an administrator-controlled installation of MathWorks Service Host
+After switching to an administrator-controlled installation of MathWorks Service Host, you must update it when a new version is available. You can do this by downloading a copy of the latest version of this repository and running steps 1 and 2 below. If the destination argument in the `install_msh.sh` script (step 2) is the same as that of your previous installation, the script automatically cleans up the previously installed version of MathWorks Service Host. If the destination argument is different, ensure to clean up the old installation, as the script will not be able to find it and clean it up.
 
 >Note: For more details about the following scripts and their available options, run them with `--help` option, e.g. `./download_msh.sh --help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the [MathWorks website](https://www.mathworks.com/MathWorksServiceHost/glnxa64/managed.zip) or by using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2025.8.0.2/release/glnxa64/managed_mathworksservicehost_2025.8.0.2_package_glnxa64.zip) or by using this command:
 ```bash
 ./download_msh.sh --destination /tmp/Downloads/MathWorks/ServiceHost
 ```
@@ -39,10 +46,6 @@ To clean up all MathWorks Service Host installations in the default location for
 > 1. You have installed MathWorks Service Host to a custom location
 > 2. You have set the environment variable `MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT` to that custom installation location for all users who may be running MathWorks products.
 
->Note: The above scripts work only for MATLAB releases starting from R2024a Update 6.
-
-## Note: Updating MathWorks Service Host
-The scripts in this repository will be updated every four weeks to reflect the newer release of MathWorks Service Host. Administrators who are managing MathWorks Service Host installations in custom locations should keep those installations up-to-date. To be notified of new releases of MathWorks Service Host, you can subscribe to releases in this repository.
 
 # Feedback
 We encourage you to try this repository with your environment and provide feedback. If you encounter a technical issue or have an enhancement request, create an issue [here](https://github.com/mathworks-ref-arch/administer-mathworks-service-host/issues).
