@@ -105,6 +105,7 @@ else
     printf "\n\t   to that custom installation path."
     printf "\n"
     read -p "Do you want to proceed? (y/N): " response
+    response=${response:-N}
     case "$response" in
         [yY][eE][sS]|[yY])
             do_cleanup

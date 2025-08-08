@@ -145,6 +145,9 @@ if($UpdateEnvironment -and (-not $NoUpdateEnvironment) ){
     Write-Host "Skipping update of the registry to set MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT system wide"
 } else {
     $response = Read-Host "Would you like to update the registry to set MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT system wide? (Y/n)"
+    if ([string]::IsNullOrWhiteSpace($response)) {
+        $response = "Y"
+    }
     switch -Regex ($response) {
     "^[yY](es)?$" {
         updateRegistry

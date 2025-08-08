@@ -104,6 +104,9 @@ if ($Force){
     Write-Output "`t - you have set the environment variable MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT"
     Write-Output "`t   to that custom installation path"
     $response = Read-Host "Do you want to proceed? (y/N):"
+    if ([string]::IsNullOrWhiteSpace($response)) {
+        $response = "N"
+    }
     switch -Regex ($response) {
     "^[yY](es)?$" {
         DoCleanup
