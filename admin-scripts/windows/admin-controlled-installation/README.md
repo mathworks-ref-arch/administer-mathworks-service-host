@@ -12,7 +12,7 @@ After switching to an administrator-controlled installation of MathWorks Service
 >Note: For more details about the following scripts and their available options, run them with `-Help` option, e.g. `.\download_msh.ps1 -Help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2025.9.0.2/release/win64/managed_mathworksservicehost_2025.9.0.2_package_win64.zip) or by using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2025.10.0.2/release/win64/managed_mathworksservicehost_2025.10.0.2_package_win64.zip) or by using this command:
 ```ps1
 .\download_msh.ps1 -Destination C:\Downloads\MathWorks\ServiceHost\
 ```

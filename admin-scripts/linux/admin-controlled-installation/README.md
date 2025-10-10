@@ -13,7 +13,7 @@ After switching to an administrator-controlled installation of MathWorks Service
 >Note: For more details about the following scripts and their available options, run them with `--help` option, e.g. `./download_msh.sh --help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2025.9.0.2/release/glnxa64/managed_mathworksservicehost_2025.9.0.2_package_glnxa64.zip) or by using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2025.10.0.2/release/glnxa64/managed_mathworksservicehost_2025.10.0.2_package_glnxa64.zip) or by using this command:
 ```bash
 ./download_msh.sh --destination /tmp/Downloads/MathWorks/ServiceHost
 ```
