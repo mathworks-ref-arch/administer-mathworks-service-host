@@ -13,10 +13,23 @@ print_usage_details_and_exit() {
     exit 1
 }
 
+awk_based_envsubst() {
+  local file="$1"
+  awk '{
+    line = $0
+    while (match(line, /\$[A-Za-z_][A-Za-z0-9_]*/)) {
+      var = substr(line, RSTART + 1, RLENGTH - 1)
+      val = ENVIRON[var]
+      line = substr(line, 1, RSTART - 1) val substr(line, RSTART + RLENGTH)
+    }
+    print line
+  }' "$file"
+}
+
 # Define warning messages
 declare -A warning_messages
-warning_messages[0]=$(envsubst < "$parent_path/man/install_msh_warning_0.txt")
-warning_messages[1]=$(envsubst < "$parent_path/man/install_msh_warning_1.txt")
+warning_messages[0]=$(awk_based_envsubst "$parent_path/man/install_msh_warning_0.txt")
+warning_messages[1]=$(awk_based_envsubst "$parent_path/man/install_msh_warning_1.txt")
 
 # Parse the provided arguments
 release_number=$(tr -d '[:space:]' < "$parent_path/latest_release.txt")
@@ -130,7 +143,7 @@ else
     fi
 fi
 
-# Utilitity for updating etc/environment file
+# Utility for updating etc/environment file
 update_etc_environment() {
     updated_entry="MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=$installation_directory"
     if grep -q '^MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=' /etc/environment; then
@@ -141,8 +154,8 @@ update_etc_environment() {
         echo "$updated_entry" >> /etc/environment
     fi
 }
-# Update the /etc/environment file to include MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT if the user agrees
 
+# Update the /etc/environment file to include MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT if the user agrees
 if [ "$update_environment" -eq 1 ] && [ "$no_update_environment" -eq 0 ]; then
     update_etc_environment
 elif [ "$update_environment" -eq 0 ] && [ "$no_update_environment" -eq 1 ]; then
