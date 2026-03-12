@@ -1,4 +1,4 @@
-# Copyright 2024 The MathWorks, Inc.
+# Copyright 2024-2026 The MathWorks, Inc.
 
 param (
     [string]$Release,
@@ -120,6 +120,44 @@ foreach ($processName in $allProcessNames) {
     }
 }
 
+# Utility for checking if this is the first install of msh
+function noOtherInstallationFound () {
+    $otherAdminControlledInstalls = Get-ChildItem -Path $installationDirectory -Directory | Where-Object { $_.Name -like "v202*" -and $_.Name -ne "v$releaseNumber" }
+    if ($otherAdminControlledInstalls) {
+        return $false
+    }
+    
+    $CdefaultInstalls = Get-ChildItem -Path "$env:LOCALAPPDATA\MathWorks\ServiceHost\" -Directory | Where-Object { $_.Name -like "v202*" -and $_.Name -ne "v$releaseNumber" }
+    if ($CdefaultInstalls) {
+        return $false
+    }
+    return $true
+}
+
+# Create or update autostart registry entries depending on whether this is the first install or not
+$autostartRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+if (noOtherInstallationFound) {
+    # This is the first installation, activate autostart by default
+    Set-ItemProperty -Path $autostartRegistryPath `
+        -Name "Mathworks Service Host" `
+        -Value "`"$versionedInstallationDir\bin\win64\MathWorksServiceHost.exe`" service --realm-id companion@prod@production"
+}
+else {
+    # Another installation was found. Honor the users preferences and update autostart files only if they exist
+    $autostartRegistryProperties = Get-ItemProperty -Path $autostartRegistryPath
+    if ($autostartRegistryProperties.PSObject.Properties.Name -contains "Mathworks Service Host") {
+        Set-ItemProperty -Path $autostartRegistryPath `
+            -Name "Mathworks Service Host" `
+            -Value "`"$versionedInstallationDir\bin\win64\MathWorksServiceHost.exe`" service --realm-id companion@prod@production"
+    }
+        
+    if ($autostartRegistryProperties.PSObject.Properties.Name -contains "MATLAB Connector") {
+        Set-ItemProperty -Path $autostartRegistryPath `
+            -Name "MATLAB Connector" `
+            -Value "`"$versionedInstallationDir\bin\win64\MATLABConnector.exe`""
+    }
+}
+
 # Remove any previously installed versions of MathWorks Service Host
 $directoriesToRemove = Get-ChildItem -Path $installationDirectory -Directory | Where-Object { $_.Name -like "v202*" -and $_.Name -ne "v$releaseNumber" }
 foreach ($dir in $directoriesToRemove) {
@@ -136,7 +174,7 @@ function updateRegistry {
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $evName -Value $installationDirectory
     [System.Environment]::SetEnvironmentVariable($evName, $installationDirectory, [System.EnvironmentVariableTarget]::Machine)
     Set-Item -Path "Env:$evName" -Value $installationDirectory
- } 
+ }
 
 # Update the registry to include MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT if the user agrees
 if($UpdateEnvironment -and (-not $NoUpdateEnvironment) ){

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2024 The MathWorks, Inc.
+# Copyright 2024-2026 The MathWorks, Inc.
 
 # Exit if any command fails
 set -e
@@ -125,6 +125,58 @@ pkill -f MATLABConnector 2>/dev/null || true
 pkill -f "MathWorksServiceHost client" 2>/dev/null || true
 pkill -f "MathWorksServiceHost-Monitor" 2>/dev/null || true
 pkill -f "MathWorksServiceHost service" 2>/dev/null || true
+
+
+# Utility for checking if this is the first install of msh
+actual_user="$SUDO_USER"
+actual_home="$(getent passwd "$actual_user" | cut -d: -f6)"
+no_other_installations_found () {
+    if find "$installation_directory" -maxdepth 1 -name 'v20*' -type d ! -name "v$release_number" | grep -q .; then
+        return 0 # Another admin controlled installation was found
+    fi
+
+    if find "$actual_home/.MathWorks/ServiceHost/-mw_shared_installs/" -maxdepth 1 -name 'v20*' -type d | grep -q .; then
+        return 0 # A previous default installation was found
+    fi
+
+    return 1
+}
+
+# Create or update autostart files depending on whether this is the first install or not
+msh_autostart_file_path="$actual_home/.config/autostart/mathworks-service-host.desktop"
+if no_other_installations_found ; then
+    # This is the first installation, activate autostart by default
+    {
+        echo "[Desktop Entry]"
+        echo "Type=Application"
+        echo "Name=Mathworks Service Host"
+        echo "Exec=$versioned_installation_dir/bin/glnxa64/MathWorksServiceHost service --realm-id companion@prod@production"
+        echo "Terminal=false"
+    } > "$msh_autostart_file_path"
+else
+    # Another installation was found. Honor the users preferences and update autostart files only if they exist
+    if [ -f "$msh_autostart_file_path" ]; then
+        {
+            echo "[Desktop Entry]"
+            echo "Type=Application"
+            echo "Name=Mathworks Service Host"
+            echo "Exec=$versioned_installation_dir/bin/glnxa64/MathWorksServiceHost service --realm-id companion@prod@production"
+            echo "Terminal=false"
+        } > "$msh_autostart_file_path"
+    fi
+
+    matlab_connector_autostart_file_path="$actual_home/.config/autostart/matlab-drive-connector.desktop"
+    if [ -f "$matlab_connector_autostart_file_path" ]; then
+        {
+            echo "[Desktop Entry]"
+            echo "Type=Application"
+            echo "Name=MATLAB Connector"
+            echo "Exec=$versioned_installation_dir/bin/MATLABConnector start"
+            echo "Terminal=false"
+
+        } > "$matlab_connector_autostart_file_path"
+    fi
+fi
 
 # Remove any previously installed versions of MathWorks Service Host
 find "$installation_directory" -maxdepth 1 -name 'v202*' -type d ! -name "v$release_number" -exec rm -rf {} +
