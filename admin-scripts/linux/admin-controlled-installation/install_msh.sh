@@ -212,7 +212,7 @@ if [ "$update_environment" -eq 1 ] && [ "$no_update_environment" -eq 0 ]; then
     update_etc_environment
 elif [ "$update_environment" -eq 0 ] && [ "$no_update_environment" -eq 1 ]; then
     printf "Skipping update of /etc/environment.\n"
-elif ! grep -Fxq "MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=$installationDirectory" /etc/environment; then
+elif ! grep -Fxq "MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=$installation_directory" /etc/environment; then
     read -p "Would you like to update /etc/environment to set MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT system wide? (Y/n): " response
     response=${response:-Y}
     case "$response" in
