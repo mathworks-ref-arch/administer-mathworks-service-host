@@ -85,6 +85,6 @@ We encourage you to try this repository with your environment and provide feedba
 
 ----
 
-Copyright 2024 The MathWorks, Inc.
+Copyright 2024-2026 The MathWorks, Inc.
 
 ----
