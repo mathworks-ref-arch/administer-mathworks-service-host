@@ -11,7 +11,7 @@ To switch from the default, auto-updating version of MathWorks Service Host to a
 >Note: For more details about the following scripts and their available options, run them with `--help` option, e.g. `./download_msh.sh --help`
 
 ## 1. Download MathWorks Service Host
-Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2026.8.0.4/release/glnxa64/managed_mathworksservicehost_2026.8.0.4_package_glnxa64.zip) or by using this command:
+Download the MathWorks Service Host zip file from the [MathWorks website](https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v2026.10.1.1/release/glnxa64/managed_mathworksservicehost_2026.10.1.1_package_glnxa64.zip) or by using this command:
 ```bash
 ./download_msh.sh --destination /tmp/Downloads/MathWorks/ServiceHost
 ```
