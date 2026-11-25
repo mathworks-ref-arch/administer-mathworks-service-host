@@ -32,6 +32,7 @@ To be notified of new releases of MathWorks Service Host, you can subscribe to r
 | R2025a | 2025.2.2.1 |
 | R2025b | 2025.8.1.1 |
 | R2026a | 2026.1.1.2 |
+| R2026b | 2026.8.0.4 |
 
 ### Q: Which is the maximum version of MathWorks Service Host that I can use with my operating system?
 The following tables show the maximum compatible version of MathWorks Service Host for each operating system version.
